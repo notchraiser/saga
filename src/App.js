@@ -1,12 +1,14 @@
 import Header from './components/Header';
 import ImageGrid from './components/ImageGrid';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
   return (
-    <div>
+    <Provider store={store} >
       <Header />
       <ImageGrid />
-    </div>  
+    </Provider>  
   );
 }
 
