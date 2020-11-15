@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
-import { Button } from "react-bootstrap";
+import Button from '../Button';
 import { loadImages } from "../../actions";
 const key = "5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02";
 
@@ -19,15 +19,10 @@ function ImageGrid() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadImages());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
-      {images.load ? (
-        <h2>Loading...</h2>
-      ) : images.error ? (
-        <h2>{images.error}</h2>
-      ) : (
         <div className="content">
           <section className="grid">
             {images.images.map((image) => (
@@ -38,11 +33,11 @@ function ImageGrid() {
               </div>
             ))}
           </section>
-          <Button variant="primary" onClick={() => dispatch(loadImages())}>
+          {images.error && <div className="error">{JSON.stringify(images.error)}</div>}
+          <Button onClick={() => !images.load && dispatch(loadImages())} loading={images.load}>
             Load Images
           </Button>{" "}
         </div>
-      )}
     </div>
   );
 }

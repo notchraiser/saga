@@ -11,7 +11,7 @@ const imagesReducer = (state = initialState, action) => {
     case IMAGES.LOAD:
       return { ...state, load: true };
     case IMAGES.LOAD_SUCCESS:
-      return { ...state, load: false, images: action.images, error: '' };
+      return { ...state, load: false, images: [...state.images, ...action.images], error: '' };
     case IMAGES.LOAD_FAIL:
       return { ...state, load: false, images: [], error: action.error };
     default:
