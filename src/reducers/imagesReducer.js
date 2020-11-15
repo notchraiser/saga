@@ -9,11 +9,11 @@ const initialState = {
 const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case IMAGES.LOAD:
-      return { ...state, load: false };
+      return { ...state, load: true };
     case IMAGES.LOAD_SUCCESS:
-      return { ...state, load: true, images: action.images };
+      return { ...state, load: false, images: action.images, error: '' };
     case IMAGES.LOAD_FAIL:
-      return { ...state, load: true, error: action.error };
+      return { ...state, load: false, images: [], error: action.error };
     default:
       return state;
   }

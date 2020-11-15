@@ -1,5 +1,11 @@
 import { IMAGES } from "../constants";
 
+export const loadPageNumber = () => {
+  return {
+    type: IMAGES.LOAD_PAGE    
+  };
+};
+
 export const loadImages = () => {
   return {
     type: IMAGES.LOAD,
@@ -19,4 +25,3 @@ export const setError = (error) => {
     error,
   };
 };
-
