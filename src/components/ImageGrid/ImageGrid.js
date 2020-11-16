@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
-import Button from '../Button';
+import Btn from '../Btn';
 import { loadImages } from "../../actions";
+import Stats from '../Stats';
 const key = "5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02";
 
 function ImageGrid() {
@@ -16,6 +17,7 @@ function ImageGrid() {
   // }, []);
 
   const images = useSelector((state) => state.images);
+  const imagestats = useSelector((state) => state.imagestats);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadImages());
@@ -29,14 +31,15 @@ function ImageGrid() {
               <div
                 key={image.id} className={`item item-${Math.ceil(image.height / image.width)}`}
               >
+                <Stats stats={imagestats[image.id]} />
                 <img src={image.urls.small} alt={image.user.username} />
               </div>
             ))}
           </section>
           {images.error && <div className="error">{JSON.stringify(images.error)}</div>}
-          <Button onClick={() => !images.load && dispatch(loadImages())} loading={images.load}>
+          <Btn onClick={() => !images.load && dispatch(loadImages())} loading={images.load}>
             Load Images
-          </Button>{" "}
+          </Btn>{" "}
         </div>
     </div>
   );

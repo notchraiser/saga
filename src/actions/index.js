@@ -1,4 +1,4 @@
-import { IMAGES } from "../constants";
+import { IMAGES, STATS } from "../constants";
 
 export const loadPageNumber = () => {
   return {
@@ -25,3 +25,28 @@ export const setError = (error) => {
     error,
   };
 };
+
+export const loadImageStats = (id) => {
+  return {
+    type: STATS.LOAD,
+    id,
+  };
+};
+
+export const setImageStats = (id, res) => {
+  return {
+    type: STATS.LOAD_SUCCESS,
+    id,
+    downloads: res.downloads,
+    likes: res.likes,
+    views: res.views,
+  };
+};
+
+export const setImageStatsError = (id) => {
+  return {
+    type: STATS.LOAD_FAIL,
+    id,    
+  };
+};
+

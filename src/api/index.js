@@ -8,3 +8,11 @@ export const fetchImages = async(nextpage) => {
     }
     return data;
 }
+export const fetchImageStats = async(id) => {
+    const response = await fetch(`${url}${id}/statistics${key}`);
+    const data = await response.json();
+    if(response.status >= 400) {
+        throw new Error(data.errors);
+    }
+    return data;
+}
