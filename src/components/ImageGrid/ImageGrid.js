@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { connect } from 'react-redux';
 import "./styles.css";
 import Btn from '../Btn';
 import { loadImages } from "../../actions";
 import Stats from '../Stats';
 const key = "5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02";
 
-function ImageGrid() {
+function ImageGrid(props) {
   // const [images, setImages] = useState([]);
   // useEffect(() => {
   //   fetch(`https://api.unsplash.com/photos/?client_id=${key}&per_page=28`)
@@ -16,18 +16,16 @@ function ImageGrid() {
   //     });
   // }, []);
 
-  const images = useSelector((state) => state.images);
-  const imagestats = useSelector((state) => state.imagestats);
-  const dispatch = useDispatch();
+  const { load, images, error, imagestats, loadImages } = props;
   useEffect(() => {
-    dispatch(loadImages());
-  }, []);
+    loadImages();
+  }, [loadImages]);
 
   return (
     <div>
         <div className="content">
           <section className="grid">
-            {images.images.map((image) => (
+            {images.map((image) => (
               <div
                 key={image.id} className={`item item-${Math.ceil(image.height / image.width)}`}
               >
@@ -36,8 +34,8 @@ function ImageGrid() {
               </div>
             ))}
           </section>
-          {images.error && <div className="error">{JSON.stringify(images.error)}</div>}
-          <Btn onClick={() => !images.load && dispatch(loadImages())} loading={images.load}>
+          {error && <div className="error">{JSON.stringify(error)}</div>}
+          <Btn onClick={() => !load && loadImages()} loading={load}>
             Load Images
           </Btn>{" "}
         </div>
@@ -45,4 +43,15 @@ function ImageGrid() {
   );
 }
 
-export default ImageGrid;
+const mapStateToProps = state => ({
+  load: state.load,
+  images: state.images.images,
+  error: state.error,
+  imagestats: state.imagestats,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadImages: () => dispatch(loadImages()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageGrid);

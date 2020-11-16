@@ -1,4 +1,4 @@
-import { call, put, take, takeEvery, select } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { loadImages, setImages, setError } from '../actions';
 import {fetchImages} from '../api';
 import { IMAGES } from '../constants';
@@ -15,7 +15,6 @@ function* handleImagesLoad() {
         // dispatch error action
         yield put(setError(err.toString()));
     }
-
 }
 
 export default function* watchImagesLoad() {
