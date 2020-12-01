@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
 
-const Header = () => <header>Get my Snaps!</header>;
+const Header = () => <header>! wOw Snaps !</header>;
 
 export default Header;

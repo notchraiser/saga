@@ -6,6 +6,8 @@ import rootSaga from "../sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
+export const store = createStore(rootReducers, applyMiddleware(sagaMiddleware));
+/*
 export const store = createStore(
   rootReducers,
   compose(
@@ -13,6 +15,7 @@ export const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+*/
 sagaMiddleware.run(rootSaga);
 // store.dispatch(loadImages());
 // store.dispatch(loadImages());
