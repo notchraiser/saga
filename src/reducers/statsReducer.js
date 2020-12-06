@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import { STATS } from "../constants";
 
 const statsReducer = (state = {}, action) => {
